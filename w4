@@ -1,0 +1,268 @@
+Code to Insert and Delete an element at the beginning and at the end in Doubly  Linked List .
+
+
+
+
+
+
+
+
+#include<stdio.h>  
+#include<stdlib.h>  
+struct node  
+{  
+    struct node *prev;  
+    struct node *next;  
+    int data;  
+};  
+struct node *head;  
+void insertion_beginning();  
+void insertion_last();  
+void deletion_beginning();  
+void deletion_last();    
+void display();  
+int main ()  
+{  
+int choice =0;  
+    while(choice != 6)  
+    {  
+          
+       
+         printf("\n1.Insert at begining\n2.Insert at last\n3.Delete at Beginning\n4.Delete at last\n5.Display\n6.Exit\n");  
+        printf("\nEnter your Choice:\n");  
+        scanf("\n%d",&choice);  
+        switch(choice)  
+        {  
+            case 1:  
+            insertion_beginning();  
+            break;  
+            case 2:  
+                    insertion_last();  
+            break;  
+            case 3:  
+            deletion_beginning();  
+            break;  
+            case 4:  
+            deletion_last();  
+            break;  
+            case 5:  
+            display();  
+            break;  
+            case 6:  
+            exit(0);  
+            break;  
+            default:  
+            printf("Please enter correct choice..");  
+        }  
+    }  
+}  
+void insertion_beginning()  
+{  
+   struct node *ptr;   
+   int item;  
+   ptr = (struct node *)malloc(sizeof(struct node));  
+   if(ptr == NULL)  
+   {  
+       printf("\nLISTFULL");  
+   }  
+   else  
+   {  
+    printf("\nEnter data to be inserted");  
+    scanf("%d",&item);  
+      
+   if(head==NULL)  
+   {  
+       ptr->next = NULL;  
+       ptr->prev=NULL;  
+       ptr->data=item;  
+       head=ptr;  
+   }  
+   else   
+   {  
+       ptr->data=item;  
+       ptr->prev=NULL;  
+       ptr->next = head;  
+       head->prev=ptr;  
+       head=ptr;  
+   }  
+   printf("\nNode inserted\n");  
+}  
+     
+}  
+void insertion_last()  
+{  
+   struct node *ptr,*temp;  
+   int item;  
+   ptr = (struct node *) malloc(sizeof(struct node));  
+   if(ptr == NULL)  
+   {  
+       printf("\nList Full");  
+   }  
+   else  
+   {  
+       printf("\nEnter data at last");  
+       scanf("%d",&item);  
+        ptr->data=item;  
+       if(head == NULL)  
+       {  
+           ptr->next = NULL;  
+           ptr->prev = NULL;  
+           head = ptr;  
+       }  
+       else  
+       {  
+          temp = head;  
+          while(temp->next!=NULL)  
+          {  
+              temp = temp->next;  
+          }  
+          temp->next = ptr;  
+          ptr ->prev=temp;  
+          ptr->next = NULL;  
+          }  
+             
+       }  
+     printf("\nnode inserted\n");  
+    }  
+
+void deletion_beginning()  
+{  
+    struct node *ptr;  
+    if(head == NULL)  
+    {  
+        printf("\n List Empty");  
+    }  
+    else if(head->next == NULL)  
+    {  
+        head = NULL;   
+        free(head);  
+        printf("\nnode deleted sucessfully\n");  
+    }  
+    else  
+    {  
+        ptr = head;  
+        head = head -> next;  
+        head -> prev = NULL;  
+        free(ptr);  
+        printf("\nnode deleted\n");  
+    }  
+  
+}  
+void deletion_last()  
+{  
+    struct node *ptr;  
+    if(head == NULL)  
+    {  
+        printf("\n List Empty");  
+    }  
+    else if(head->next == NULL)  
+    {  
+        head = NULL;   
+        free(head);   
+        printf("\nnode deleted\n");  
+    }  
+    else   
+    {  
+        ptr = head;   
+        if(ptr->next != NULL)  
+        {  
+            ptr = ptr -> next;   
+        }  
+        ptr -> prev -> next = NULL;   
+        free(ptr);  
+        printf("\nnode deleted\n");  
+    }  
+}  
+
+void display()  
+{  
+    struct node *ptr;  
+    printf("\nvalues in list are.\n");  
+    ptr = head;  
+    while(ptr != NULL)  
+    {  
+        printf("%d\n",ptr->data);  
+        ptr=ptr->next;  
+    }  
+}   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ Code to push & pop and check Isempty, Isfull, and Return top element in stacks
+
+
+
+#include <iostream>
+using namespace std;
+int stack[100], n=1, top=-1 ;
+
+void push(int val) {
+if(top>=n-1)
+cout<<"IS FULL"<<endl;
+else {
+top++;
+stack[top]=val;
+}
+}
+void pop() {
+if(top<=-1)
+cout<<"IS EMPTY"<<endl;
+else {
+cout<<"POP ELEMENT IS: "<< stack[top] <<endl;
+top--;
+}
+}
+void peek() {
+if(top<=-1)
+cout<<"STACK UNDERFLOW \n"<<endl;
+else {
+cout<<" TOP ELEMENT IS: "<< stack[top] <<endl;
+}
+}
+
+int main() {
+int ch, val;
+cout<<"1) PUSH"<<endl;
+cout<<"2) POP"<<endl;
+cout<<"3) PEEK"<<endl;
+
+do {
+cout<<"ENTER YOUR CHOICE: ";
+cin>>ch;
+switch(ch) {
+case 1: {
+cout<<"ENTER VALUE FOR PUSH: ";
+cin>>val;
+push(val);
+cout<<"VALUE IS ADDED \n"<<endl;
+break;
+}
+case 2: {
+pop();
+cout<<"\n";
+break;
+}
+case 3: {
+peek();
+               cout<<"\n";
+break;
+}
+
+default: {
+cout<<"YOUR CHOICE IS NOT VALID"<<endl;
+}
+}
+}while(ch!=5);
+return 0;
+}
